@@ -23,5 +23,6 @@ namespace DummyWPF.Search
         {
             InitializeComponent();
         }
+
     }
 }
