@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DummyWPF.Items;
+using DummyWPF.Search;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,18 @@ namespace DummyWPF
         public wndMain()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            wndSearch wndSearch = new wndSearch();
+            wndSearch.ShowDialog();
+        }
+
+        private void mnSearchforItems_Click(object sender, RoutedEventArgs e)
+        {
+            wndItems wndItems = new wndItems();
+            wndItems.ShowDialog();
         }
     }
 }

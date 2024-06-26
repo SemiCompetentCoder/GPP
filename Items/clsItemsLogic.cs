@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DummyWPF.Items
 {
-    internal class clsItemsLogic
+    public class clsItemsLogic
     {
     }
 }

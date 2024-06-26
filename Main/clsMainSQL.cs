@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DummyWPF.Main
 {
-    internal class clsMainSQL
+    public class clsMainSQL
     {
     }
 }
