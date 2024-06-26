@@ -19,7 +19,7 @@
         <Label x:Name="labelCode" Content="Code" HorizontalAlignment="Left" Margin="420,19,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
         <TextBox x:Name="textBoxCost" HorizontalAlignment="Left" Margin="420,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.479,-0.931"/>
         <Label x:Name="labelCost" Content="Cost" HorizontalAlignment="Left" Margin="420,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
-        <Label x:Name="labelCost_Copy" Content="Cost" HorizontalAlignment="Left" Margin="420,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
+        <Label x:Name="labelDescription" Content="Description" HorizontalAlignment="Left" Margin="420,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
         <RichTextBox Margin="420,201,53,82">
             <FlowDocument>
                 <Paragraph>
