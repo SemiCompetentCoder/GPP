@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DummyWPF.Search
 {
-    internal class clsSearchLogic
+    public class clsSearchLogic
     {
     }
 }
