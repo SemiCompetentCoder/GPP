@@ -32,15 +32,14 @@ namespace DummyWPF
         /// </summary>
         private int InvoiceNum { get; set; }
 
-        //Error Handling
+        /// <summary>
+        /// Error Handling
+        /// </summary>
         private clsErrorHandling errorHandler;
-
-        //main logic
         
-        
-
-
-
+        /// <summary>
+        /// Main Window Constructor
+        /// </summary>
         public wndMain()
         {
             InitializeComponent();
@@ -50,18 +49,32 @@ namespace DummyWPF
             
         }
 
+        /// <summary>
+        /// Invoice Search
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             wndSearch wndSearch = new wndSearch(this);
             wndSearch.ShowDialog();
         }
 
+        /// <summary>
+        /// Update Items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnSearchforItems_Click(object sender, RoutedEventArgs e)
         {
             wndItems wndItems = new wndItems(this);
             wndItems.ShowDialog();
         }
 
+        /// <summary>
+        /// Pass the invoice number to the main window
+        /// </summary>
+        /// <param name="invoiceNum"></param>
         public void passInvoiceNum(int invoiceNum)
         {
             InvoiceNum = invoiceNum;
@@ -70,6 +83,26 @@ namespace DummyWPF
         }
 
 
+        /// <summary>
+        /// Setup to receive data from the search window
+        /// </summary>
+        public void passFromSearch()
+        {
+
+           //Implement the logic to update the fields based on the invoice number
+        }
+
+        /// <summary>
+        /// Setup to receive data from the items window
+        /// </summary>
+        public void passFromItems()
+        {
+            //Implement the logic to update the fields based on the invoice number
+        }
+
+        /// <summary>
+        /// Refresh the displayed fields
+        /// </summary>
         public void refreshFields()
         {
             try
@@ -90,6 +123,11 @@ namespace DummyWPF
             
         }
 
+        /// <summary>
+        /// Update the price based on the selected item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboItemDesc_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             clsMainLogic clsMainLogic = new clsMainLogic();
@@ -99,5 +137,6 @@ namespace DummyWPF
             //Format to currency
             txtItemCost.Text = ItemList[index].ItemCost.ToString("C");
         }
+
     }
 }

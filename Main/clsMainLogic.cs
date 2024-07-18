@@ -23,25 +23,20 @@ namespace DummyWPF.Main
         private clsMainSQL sql;
 
         /// <summary>
-        /// Invoice model
+        /// Error Handler
         /// </summary>
-        private modInvoice _InvoiceModel;
-
-        /// <summary>
-        /// Item Description model
-        /// </summary>
-        private modItemDesc _ItemDescModel;
-
-        /// <summary>
-        /// Line Items model
-        /// </summary>
-        private modLineItems _LineItems;
-
-        //Error Handler
         private clsErrorHandling errorHandler;
 
+        /// <summary>
+        /// Invoice List storage
+        /// </summary>
         private List<modInvoice> InvoiceList { get; set; }
 
+        /// <summary>
+        /// get all invoices
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<modInvoice> getInvoices()
         {
             try
@@ -73,6 +68,11 @@ namespace DummyWPF.Main
 
         }
 
+        /// <summary>
+        /// get all items
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<modItemDesc> getAllItems()
         {
             List<modItemDesc> ItemList = new List<modItemDesc>();
