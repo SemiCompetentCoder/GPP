@@ -20,11 +20,14 @@
             </DataGrid.Columns>
         </DataGrid>
         <Canvas Grid.Column="1">
-            <ComboBox Canvas.Left="10" Canvas.Top="10" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <ComboBox Canvas.Left="140" Canvas.Top="10" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <ComboBox Canvas.Left="270" Canvas.Top="10" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button Content="Select" Canvas.Left="70" Canvas.Top="58" Height="44" Width="89" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button Content="Clear" Canvas.Left="238" Canvas.Top="58" Height="46" Width="92" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox Canvas.Left="10" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox Canvas.Left="140" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox Canvas.Left="270" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Button Content="Select" Canvas.Left="26" Canvas.Top="92" Height="44" Width="88" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Content="Clear" Canvas.Left="154" Canvas.Top="91" Height="46" Width="92" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="Invoice Number" Canvas.Left="23" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Invoice Date" Canvas.Left="162" Canvas.Top="10"/>
+            <Label Content="Total Charge" Canvas.Left="292" Canvas.Top="10"/>
 
         </Canvas>
 
