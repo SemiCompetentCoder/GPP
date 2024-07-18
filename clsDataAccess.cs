@@ -23,7 +23,7 @@ public class clsDataAccess
     /// </summary>
     public clsDataAccess()
     {
-        sConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Directory.GetCurrentDirectory() + "\\ReservationSystem.accdb";
+        sConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Directory.GetCurrentDirectory() + "\\Invoice.accdb";
     }
 
     /// <summary>
