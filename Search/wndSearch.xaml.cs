@@ -19,10 +19,22 @@ namespace DummyWPF.Search
     /// </summary>
     public partial class wndSearch : Window
     {
-        public wndSearch()
+
+        private wndMain mainWindow;
+
+        public wndSearch(wndMain mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow; //Main window is passed in as a parameter
         }
+
+
+        //When this.Close is called tell the main window to refresh.
+        //Method Definition HERE
+        //{
+        //    mainWindow.refreshFields();
+        //    this.Close();
+        //}
 
     }
 }
