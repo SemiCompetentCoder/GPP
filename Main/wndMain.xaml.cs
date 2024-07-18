@@ -21,6 +21,14 @@ namespace DummyWPF
     /// </summary>
     public partial class wndMain : Window
     {
+        /// <summary>
+        /// Invoice Number from the search window (Needs getters and setters)
+        /// So that the application window can update the fields based on inputed data.
+        /// </summary>
+        private int InvoiceNum { get; set; }
+
+
+
         public wndMain()
         {
             InitializeComponent();
@@ -28,14 +36,30 @@ namespace DummyWPF
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            wndSearch wndSearch = new wndSearch();
+            wndSearch wndSearch = new wndSearch(this);
             wndSearch.ShowDialog();
         }
 
         private void mnSearchforItems_Click(object sender, RoutedEventArgs e)
         {
-            wndItems wndItems = new wndItems();
+            wndItems wndItems = new wndItems(this);
             wndItems.ShowDialog();
         }
+
+        public void passInvoiceNum(int invoiceNum)
+        {
+            InvoiceNum = invoiceNum;
+            
+            //Implement the logic to update the fields based on the invoice number
+        }
+
+
+        public void refreshFields()
+        {
+            //Implement the logic to refresh the fields
+            
+        }
+
+        
     }
 }
