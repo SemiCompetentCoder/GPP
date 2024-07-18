@@ -17,5 +17,16 @@ namespace GroupProject3280.Models
         //Item Cost
         public decimal ItemCost { get; set; }
 
+        //Override the toString()
+        public override string ToString()
+        {
+            return ItemDesc.ToString();
+        }
+
+        public string getCost()
+        {
+            return ItemCost.ToString();
+        }
+
     }
 }

@@ -27,15 +27,13 @@
         <Label Content="Invoice Date: " Margin="0,28,10,0" VerticalAlignment="Top" Grid.Row="1" Height="26" HorizontalAlignment="Right" Width="80"/>
         <Calendar HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="168" Width="179"/>
         <Label Content="Item Description:" HorizontalAlignment="Center" Margin="0,202,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="100"/>
-        <ComboBox HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top" Width="161" Grid.Row="1" Grid.Column="1" Height="22"/>
+        <ComboBox x:Name="cboItemDesc" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top" Width="161" Grid.Row="1" Grid.Column="1" Height="22" SelectionChanged="cboItemDesc_SelectionChanged"/>
         <Label Content="Item Cost:" Margin="0,233,10,0" VerticalAlignment="Top" Grid.Row="1" Height="26" HorizontalAlignment="Right" Width="63"/>
-        <TextBox HorizontalAlignment="Left" Margin="10,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" AutomationProperties.HelpText="$100.00" Height="22" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox x:Name="txtItemCost" HorizontalAlignment="Left" Margin="10,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" AutomationProperties.HelpText="$100.00" Height="22" Grid.Row="1" Grid.Column="1" IsReadOnly="True" IsEnabled="False"/>
         <Button Content="Add Item to Invoice" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="161" Height="23" Grid.Row="1" Grid.Column="1"/>
         <Button Content="Delete Item from Invoice" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Height="23" Width="161" Grid.Row="1" Grid.Column="1"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="2,2,10,10" Grid.Column="2" Grid.Row="1">
+        <DataGrid x:Name="InvoicesList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="2,2,10,10" Grid.Column="2" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Item Name"/>
-                <DataGridTextColumn Header="Item Cost"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Save Current Invoice" HorizontalAlignment="Left" Margin="2,1,0,1" Width="145" Grid.Column="2" Grid.Row="2"/>
