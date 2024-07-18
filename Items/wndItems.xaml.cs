@@ -19,9 +19,21 @@ namespace DummyWPF.Items
     /// </summary>
     public partial class wndItems : Window
     {
-        public wndItems()
+        private wndMain mainWindow;
+        
+
+        public wndItems(wndMain mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow; //Main window is passed in as a parameter
         }
+
+
+        //When this.Close is called tell the main window to refresh.
+        //Method Definition HERE
+        //{
+        //    mainWindow.refreshFields();
+        //    this.Close();
+        //}
     }
 }
