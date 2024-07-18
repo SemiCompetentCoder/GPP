@@ -19,7 +19,10 @@ namespace DummyWPF.Main
 
         #region Selects
 
-        //Get all Invoices
+
+        /// <summary>
+        /// Get all Invoices
+        ///</summary>
         public static string GetAllInvoices()
         {
             try
@@ -33,7 +36,11 @@ namespace DummyWPF.Main
             }
         }
 
-        //GetLatestInvoice
+        /// <summary>
+        /// GetLatestInvoice
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string getLatestInvoice()
         {
             try
@@ -47,7 +54,12 @@ namespace DummyWPF.Main
             }
         }
 
-        //GetInvoiceByNumber
+        /// <summary>
+        /// GetInvoiceByNumber
+        /// </summary>
+        /// <param name="InvoiceNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string getInvoiceByNumber(string InvoiceNumber)
         {
             try
@@ -61,7 +73,12 @@ namespace DummyWPF.Main
             }
         }
 
-        //GetItemsByInvoice
+        /// <summary>
+        /// GetItemsByInvoice
+        /// </summary>
+        /// <param name="InvoiceNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string getItemsByInvoice(string InvoiceNumber)
         {
             try
@@ -75,7 +92,11 @@ namespace DummyWPF.Main
             }
         }
 
-        //getAllItems
+        /// <summary>
+        /// getAllItems
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string getAllItems()
         {
             try
@@ -89,7 +110,12 @@ namespace DummyWPF.Main
             }
         }
 
-        //getItembyCode
+        /// <summary>
+        /// getItembyCode
+        /// </summary>
+        /// <param name="ItemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string getItemByCode(string ItemCode)
         {
             try
@@ -111,7 +137,13 @@ namespace DummyWPF.Main
 
 
         #region Updates
-        //Update Invoice
+        /// <summary>
+        /// Update Invoice
+        /// </summary>
+        /// <param name="TotalCost"></param>
+        /// <param name="InvoiceNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string UpdateInvoice(string TotalCost, string InvoiceNumber)
         {
             try
@@ -125,6 +157,13 @@ namespace DummyWPF.Main
             }
         }
 
+        /// <summary>
+        /// Update Invoice Total Cost
+        /// </summary>
+        /// <param name="newTotal"></param>
+        /// <param name="invoiceNum"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string UpdateInvoiceTotalCost(string newTotal, string invoiceNum) 
         { 
             try
@@ -140,7 +179,14 @@ namespace DummyWPF.Main
         #endregion
 
         #region Inserts
-        //Insert LineItems
+        /// <summary>
+        /// Insert LineItems
+        /// </summary>
+        /// <param name="InvoiceNumber"></param>
+        /// <param name="LineItemNumber"></param>
+        /// <param name="ItemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string addLineItem(string InvoiceNumber, string LineItemNumber, string ItemCode)
         {
             try
@@ -154,7 +200,13 @@ namespace DummyWPF.Main
             }
         }
 
-        //Insert Invoice
+        /// <summary>
+        /// Insert Invoice
+        /// </summary>
+        /// <param name="InvoiceDate"></param>
+        /// <param name="TotalCost"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string addInvoice(DateTime InvoiceDate, string TotalCost)
         {
             try
@@ -171,7 +223,12 @@ namespace DummyWPF.Main
 
         #region Delete
 
-        //Delete all Invoice Line Items
+        /// <summary>
+        /// Delete all Invoice Line Items
+        /// </summary>
+        /// <param name="InvoiceNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string deleteAllInvoiceLineItems(string InvoiceNumber)
         {
             try
@@ -185,7 +242,12 @@ namespace DummyWPF.Main
             }
         }
 
-        //Delete Invoice
+        /// <summary>
+        /// Delete Invoice
+        /// </summary>
+        /// <param name="InvoiceNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string deleteInvoice(string InvoiceNumber)
         {
             try
