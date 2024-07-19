@@ -14,21 +14,15 @@
                 <DataGridTextColumn Header="Description" Width="242"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="buttonSubmit" Content="Submit" HorizontalAlignment="Left" Margin="420,393,0,0" VerticalAlignment="Top" Width="87"/>
-        <TextBox x:Name="textBoxCode" HorizontalAlignment="Left" Margin="420,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="bSubmit" Content="Submit" HorizontalAlignment="Left" Margin="420,393,0,0" VerticalAlignment="Top" Width="87" Click="bSubmit_Click"/>
+        <TextBox x:Name="tbCode" HorizontalAlignment="Left" Margin="420,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="labelCode" Content="Code" HorizontalAlignment="Left" Margin="420,19,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
-        <TextBox x:Name="textBoxCost" HorizontalAlignment="Left" Margin="420,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.479,-0.931"/>
+        <TextBox x:Name="tbCost" HorizontalAlignment="Left" Margin="420,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.479,-0.931"/>
         <Label x:Name="labelCost" Content="Cost" HorizontalAlignment="Left" Margin="420,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
         <Label x:Name="labelDescription" Content="Description" HorizontalAlignment="Left" Margin="420,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
-        <RichTextBox Margin="420,201,53,82">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text=""/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <Button x:Name="buttonRead" Content="Read" HorizontalAlignment="Left" Margin="525,393,0,0" VerticalAlignment="Top" Width="87"/>
-        <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="634,393,0,0" VerticalAlignment="Top" Width="87"/>
+        <Button x:Name="bRead" Content="Read" HorizontalAlignment="Left" Margin="525,393,0,0" VerticalAlignment="Top" Width="87"/>
+        <Button x:Name="bDelete" Content="Delete" HorizontalAlignment="Left" Margin="634,393,0,0" VerticalAlignment="Top" Width="87" Click="bDelete_Click"/>
+        <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Margin="420,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="301" Height="139"/>
 
     </Grid>
 </Window>
