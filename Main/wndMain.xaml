@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DummyWPF"
         mc:Ignorable="d"
-        Title="wndMain" Height="450" Width="800">
-    <Grid>
-        
+        Title="wndMain" Height="453" Width="800">
+    <Grid Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="336.035"/>
+            <RowDefinition Height="53.005"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="121"/>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="459"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.ColumnSpan="3" Margin="0,0,0,4">
+            <MenuItem Header="Search for Invoice" Click="MenuItem_Click"></MenuItem>
+            <MenuItem x:Name="mnSearchforItems" Header="Edit Items" Height="23" Click="mnSearchforItems_Click"></MenuItem>
+        </Menu>
+        <Label Content="Inovice Number:" Margin="0,1,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Center" Width="97" Grid.Row="1"/>
+        <Label Content="TBD" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="32" Grid.Row="1"/>
+        <Label Content="Invoice Date: " Margin="0,28,10,0" VerticalAlignment="Top" Grid.Row="1" Height="26" HorizontalAlignment="Right" Width="80"/>
+        <Calendar HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="168" Width="179"/>
+        <Label Content="Item Description:" HorizontalAlignment="Center" Margin="0,202,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="100"/>
+        <ComboBox x:Name="cboItemDesc" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top" Width="161" Grid.Row="1" Grid.Column="1" Height="22" SelectionChanged="cboItemDesc_SelectionChanged"/>
+        <Label Content="Item Cost:" Margin="0,233,10,0" VerticalAlignment="Top" Grid.Row="1" Height="26" HorizontalAlignment="Right" Width="63"/>
+        <TextBox x:Name="txtItemCost" HorizontalAlignment="Left" Margin="10,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" AutomationProperties.HelpText="$100.00" Height="22" Grid.Row="1" Grid.Column="1" IsReadOnly="True" IsEnabled="False"/>
+        <Button Content="Add Item to Invoice" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="161" Height="23" Grid.Row="1" Grid.Column="1"/>
+        <Button Content="Delete Item from Invoice" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Height="23" Width="161" Grid.Row="1" Grid.Column="1"/>
+        <DataGrid x:Name="InvoicesList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="2,2,10,10" Grid.Column="2" Grid.Row="1">
+            <DataGrid.Columns>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Save Current Invoice" HorizontalAlignment="Left" Margin="2,1,0,1" Width="145" Grid.Column="2" Grid.Row="2"/>
+        <Button Content="Update Current Invoice" HorizontalAlignment="Left" Margin="152,1,0,1" Width="146" Grid.Column="2" Grid.Row="2"/>
+        <Button Content="Delete Current Invoice" HorizontalAlignment="Left" Margin="304,1,0,1" Width="146" Grid.Column="2" Grid.Row="2"/>
     </Grid>
 </Window>
