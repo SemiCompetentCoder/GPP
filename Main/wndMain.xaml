@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DummyWPF"
         mc:Ignorable="d"
-        Title="wndMain" Height="453" Width="800">
-    <Grid Margin="0,0,0,-6">
+        Title="wndMain" Height="474" Width="826">
+    <Grid Margin="0,0,-17,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="28"/>
             <RowDefinition Height="336.035"/>
@@ -23,21 +23,21 @@
             <MenuItem x:Name="mnSearchforItems" Header="Edit Items" Height="23" Click="mnSearchforItems_Click"></MenuItem>
         </Menu>
         <Label Content="Inovice Number:" Margin="0,1,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Center" Width="97" Grid.Row="1"/>
-        <Label Content="TBD" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="32" Grid.Row="1"/>
+        <Label x:Name="txtInvoiceNumber" Content="TBD" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="179" Grid.Row="1"/>
         <Label Content="Invoice Date: " Margin="0,28,10,0" VerticalAlignment="Top" Grid.Row="1" Height="26" HorizontalAlignment="Right" Width="80"/>
-        <Calendar HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="168" Width="179"/>
+        <Calendar x:Name="dateSelector" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="168" Width="179" UseLayoutRounding="True"/>
         <Label Content="Item Description:" HorizontalAlignment="Center" Margin="0,202,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="100"/>
         <ComboBox x:Name="cboItemDesc" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top" Width="161" Grid.Row="1" Grid.Column="1" Height="22" SelectionChanged="cboItemDesc_SelectionChanged"/>
         <Label Content="Item Cost:" Margin="0,233,10,0" VerticalAlignment="Top" Grid.Row="1" Height="26" HorizontalAlignment="Right" Width="63"/>
         <TextBox x:Name="txtItemCost" HorizontalAlignment="Left" Margin="10,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" AutomationProperties.HelpText="$100.00" Height="22" Grid.Row="1" Grid.Column="1" IsReadOnly="True" IsEnabled="False"/>
-        <Button Content="Add Item to Invoice" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="161" Height="23" Grid.Row="1" Grid.Column="1"/>
-        <Button Content="Delete Item from Invoice" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Height="23" Width="161" Grid.Row="1" Grid.Column="1"/>
-        <DataGrid x:Name="InvoicesList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="2,2,10,10" Grid.Column="2" Grid.Row="1">
+        <Button x:Name="btnAddItem" Content="Add Item to Invoice" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="161" Height="23" Grid.Row="1" Grid.Column="1" Click="btnAddItem_Click"/>
+        <Button x:Name="btnDeleteItem" Content="Delete Item from Invoice" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Height="23" Width="161" Grid.Row="1" Grid.Column="1" Click="btnDeleteItem_Click"/>
+        <DataGrid x:Name="InvoicesList" Margin="2,2,10,32" Grid.Column="2" Grid.Row="1" MinColumnWidth="3" SelectionChanged="InvoicesList_SelectionChanged">
             <DataGrid.Columns>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Save Current Invoice" HorizontalAlignment="Left" Margin="2,1,0,1" Width="145" Grid.Column="2" Grid.Row="2"/>
-        <Button Content="Update Current Invoice" HorizontalAlignment="Left" Margin="152,1,0,1" Width="146" Grid.Column="2" Grid.Row="2"/>
-        <Button Content="Delete Current Invoice" HorizontalAlignment="Left" Margin="304,1,0,1" Width="146" Grid.Column="2" Grid.Row="2"/>
+        <Button x:Name="btnSave" Content="Save/Update Current Invoice" HorizontalAlignment="Left" Margin="2,1,0,1" Width="297" Grid.Column="2" Grid.Row="2" Click="btnSave_Click"/>
+        <Button x:Name="btnDelete" Content="Delete Current Invoice" HorizontalAlignment="Left" Margin="304,1,0,1" Width="146" Grid.Column="2" Grid.Row="2" Click="btnDelete_Click"/>
+        <Label x:Name="lblInvoiceTotal" Grid.Column="2" Content="Total: $0.00" HorizontalAlignment="Left" Margin="304,306,0,0" Grid.Row="1" VerticalAlignment="Top" Width="145" HorizontalContentAlignment="Right" FontWeight="Bold"/>
     </Grid>
 </Window>

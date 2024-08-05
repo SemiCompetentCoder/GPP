@@ -20,7 +20,7 @@ namespace GroupProject3280.Models
         //Override the toString()
         public override string ToString()
         {
-            return ItemDesc.ToString();
+            return ItemDesc.ToString() + " $" + ItemCost + ".00";
         }
 
         public string getCost()

@@ -36,6 +36,21 @@ namespace DummyWPF
         /// Error Handling
         /// </summary>
         private clsErrorHandling errorHandler;
+
+        /// <summary>
+        /// Main Logic Class
+        /// </summary>
+        clsMainLogic MainLogic = new clsMainLogic();
+
+        /// <summary>
+        /// Item list to store values for main list
+        /// </summary>
+        List<modItemDesc> ItemList = new List<modItemDesc>();
+
+        /// <summary>
+        /// Current Invoice object
+        /// </summary>
+        modInvoice currentInvoice;
         
         /// <summary>
         /// Main Window Constructor
@@ -44,7 +59,16 @@ namespace DummyWPF
         {
             InitializeComponent();
             errorHandler = new clsErrorHandling();
+
+            //Here for testing
+            InvoiceNum = 0;
+            
+            dateSelector.SelectedDate = DateTime.Now;
+            btnAddItem.IsEnabled = false;
+            btnDeleteItem.IsEnabled = false;
             refreshFields();
+            getInvoiceLineItems(InvoiceNum);
+            calculateTotal();
             
             
         }
@@ -86,10 +110,19 @@ namespace DummyWPF
         /// <summary>
         /// Setup to receive data from the search window
         /// </summary>
-        public void passFromSearch()
+        public void passFromSearch(modInvoice invoice)
         {
 
-           //Implement the logic to update the fields based on the invoice number
+            //Implement the logic to update the fields based on the invoice number
+            InvoiceNum = invoice.InvoiceNum;
+
+            //Update Everything
+            dateSelector.SelectedDate = DateTime.Now;
+            btnAddItem.IsEnabled = false;
+            btnDeleteItem.IsEnabled = false;
+            refreshFields();
+            getInvoiceLineItems(InvoiceNum);
+            calculateTotal();
         }
 
         /// <summary>
@@ -98,6 +131,35 @@ namespace DummyWPF
         public void passFromItems()
         {
             //Implement the logic to update the fields based on the invoice number
+            //Just need to tell the main window to update its fields
+            dateSelector.SelectedDate = DateTime.Now;
+            btnAddItem.IsEnabled = false;
+            btnDeleteItem.IsEnabled = false;
+            refreshFields();
+            getInvoiceLineItems(InvoiceNum);
+            calculateTotal();
+        }
+
+        /// <summary>
+        /// Get Invoice Line Items
+        /// </summary>
+        /// <param name="invoiceNumber"></param>
+        private void getInvoiceLineItems(int invoiceNumber)
+        {
+            try
+            {
+                //Get the invoice line items
+                clsMainLogic clsMainLogic = new clsMainLogic();
+                ItemList = clsMainLogic.getItemsInInvoice(invoiceNumber);
+                InvoicesList.ItemsSource = ItemList;
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
         /// <summary>
@@ -107,10 +169,34 @@ namespace DummyWPF
         {
             try
             {
+                //Sleep system for 500ms
+                //System.Threading.Thread.Sleep(500);
                 //Implement the logic to refresh the fields
                 clsMainLogic mainLogic = new clsMainLogic();
-                InvoicesList.ItemsSource = mainLogic.getInvoices();
+                currentInvoice = mainLogic.getInvoiceById(InvoiceNum);
+
+                
+
+                InvoicesList.ItemsSource = ItemList;
+                if (InvoiceNum == 0)
+                {
+                    txtInvoiceNumber.Content = "New Invoice";
+                }
+                else {
+                    txtInvoiceNumber.Content = InvoiceNum.ToString(); 
+                }
+                //InvoicesList.ItemsSource = mainLogic.getItemsInInvoice(5000);
+
+                //Clear combo box
+                cboItemDesc.SelectedItem = null;
                 cboItemDesc.ItemsSource = mainLogic.getAllItems();
+
+                //Set the date field from the db
+                if (currentInvoice.InvoiceNum != 0)
+                {
+                    dateSelector.SelectedDate = currentInvoice.InvoiceDate;
+                    dateSelector.DisplayDate = currentInvoice.InvoiceDate;
+                }
             }
             catch (Exception ex)
             {
@@ -130,13 +216,196 @@ namespace DummyWPF
         /// <param name="e"></param>
         private void cboItemDesc_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            clsMainLogic clsMainLogic = new clsMainLogic();
-            List<modItemDesc> ItemList = clsMainLogic.getAllItems();
+            try
+            {
+                //Check if field is not null
+                if (cboItemDesc.SelectedItem != null)
+                {
+                    btnAddItem.IsEnabled = true;
+                    clsMainLogic clsMainLogic = new clsMainLogic();
+                    List<modItemDesc> ItemList = clsMainLogic.getAllItems();
 
-            int index = cboItemDesc.SelectedIndex;
-            //Format to currency
-            txtItemCost.Text = ItemList[index].ItemCost.ToString("C");
+                    int index = cboItemDesc.SelectedIndex;
+                    //Format to currency
+                    txtItemCost.Text = ItemList[index].ItemCost.ToString("C");
+                }
+            }
+            catch(Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
+        
+
+        /// <summary>
+        /// Save/Update Changes to Database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Loop through the items and remove all items and replace them with the new items
+                List<modItemDesc> items = MainLogic.getItemsInInvoice(InvoiceNum);
+
+                //Calculate the total cost of the items
+                int totalCost = 0;
+                foreach (modItemDesc item in ItemList)
+                {
+                    //Convert to decimal nearest interger
+                    int newcost = Convert.ToInt32(item.ItemCost);
+                    totalCost += newcost;
+                }
+
+                //Create new invoice if the invoice number is zero
+
+                if (InvoiceNum == 0)
+                {
+                    InvoiceNum = MainLogic.createInvoice((DateTime)dateSelector.SelectedDate, totalCost);
+                }
+                
+                //Update the invoice with the new total cost
+                MainLogic.saveInvoice(ItemList, InvoiceNum);
+                MainLogic.updateInvoice(totalCost,  InvoiceNum);
+                
+
+                refreshFields();
+                txtItemCost.Text = "";
+                btnAddItem.IsEnabled = false;
+
+                lblInvoiceTotal.Content = "Total: $" + totalCost + ".00";
+                
+
+                
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
+
+            
+
+
+        }
+
+        /// <summary>
+        /// Delete the invoice from the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            MainLogic.deleteInvoice(InvoiceNum);
+            InvoiceNum = 0;
+            txtInvoiceNumber.Content = "New Invoice";
+            InvoicesList.ItemsSource = null;
+            ItemList.Clear();
+        }
+
+        
+        /// <summary>
+        /// When an item is selected from the list enable the delete button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InvoicesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Enable the delete button
+            btnDeleteItem.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Add an item to the list of items from the combo box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Get the selected item
+                modItemDesc item = (modItemDesc)cboItemDesc.SelectedItem;
+
+                //Add Item to list
+               
+                ItemList.Add(item);
+
+                //Clear the list
+                InvoicesList.ItemsSource = null;
+                InvoicesList.ItemsSource = ItemList;
+
+                calculateTotal();
+                
+            }
+            catch(Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
+        }
+
+
+        /// <summary>
+        /// Delete an item from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Get selected item from the list
+                modItemDesc item = (modItemDesc)InvoicesList.SelectedItem;
+                ItemList.Remove(item);
+
+                //Update the main list
+                InvoicesList.ItemsSource = null;
+                InvoicesList.ItemsSource = ItemList;
+
+                refreshFields();
+
+                //Disable the delete button
+                btnDeleteItem.IsEnabled = false;
+                txtItemCost.Text = string.Empty;
+                btnAddItem.IsEnabled = false;
+
+                calculateTotal();
+                
+            }
+            catch(Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
+        }
+
+        /// <summary>
+        /// Calculate the invoices total
+        /// </summary>
+        private void calculateTotal()
+        {
+            int totalCost = 0;
+            foreach (modItemDesc item in ItemList)
+            {
+                //Convert to decimal nearest interger
+                int newcost = Convert.ToInt32(item.ItemCost);
+                totalCost += newcost;
+            }
+
+            lblInvoiceTotal.Content = "Total: $" + totalCost + ".00";
+
+        }
     }
 }

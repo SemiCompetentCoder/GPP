@@ -83,7 +83,7 @@ namespace DummyWPF.Main
         {
             try
             {
-                string sSQL = "SELECT ItemDesc.ItemCode, ItemDesc.ItemDesc, ItemDesc.ItemCost FROM ItemDesc INNER JOIN LineItems ON ItemDesc.ItemCode = LineItems.ItemCode WHERE LineItems.InvoiceNum = " + InvoiceNumber;
+                string sSQL = "SELECT ItemDesc.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM ItemDesc INNER JOIN (Invoices INNER JOIN LineItems ON Invoices.InvoiceNum = LineItems.InvoiceNum) ON ItemDesc.ItemCode = LineItems.ItemCode WHERE LineItems.InvoiceNum=" + InvoiceNumber;
                 return sSQL;
             }
             catch (Exception e)
@@ -211,7 +211,7 @@ namespace DummyWPF.Main
         {
             try
             {
-                string sSQL = "INSERT INTO Invoices (InvoiceDate, TotalCost) Values (#"+ InvoiceDate +"#, "+ TotalCost +")";
+                string sSQL = "INSERT INTO Invoices (InvoiceDate, TotalCost) Values (#"+ InvoiceDate.ToString() +"#, "+ TotalCost +")";
                 return sSQL;
             }
             catch (Exception e)

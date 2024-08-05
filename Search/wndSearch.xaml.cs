@@ -26,6 +26,7 @@ namespace DummyWPF.Search
         {
             InitializeComponent();
             this.mainWindow = mainWindow; //Main window is passed in as a parameter
+            
         }
 
 
