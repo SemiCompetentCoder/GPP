@@ -165,12 +165,10 @@ namespace DummyWPF
         /// <summary>
         /// Refresh the displayed fields
         /// </summary>
-        public void refreshFields()
+        private void refreshFields()
         {
             try
             {
-                //Sleep system for 500ms
-                //System.Threading.Thread.Sleep(500);
                 //Implement the logic to refresh the fields
                 clsMainLogic mainLogic = new clsMainLogic();
                 currentInvoice = mainLogic.getInvoiceById(InvoiceNum);
