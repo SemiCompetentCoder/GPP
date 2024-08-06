@@ -318,7 +318,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="5">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="5" Background="White">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -694,7 +694,7 @@
         <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="txtItemCost" HorizontalAlignment="Left" Margin="10,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" AutomationProperties.HelpText="$100.00" Height="22" Grid.Row="1" Grid.Column="1" IsReadOnly="True" IsEnabled="False"/>
         <Button Style="{DynamicResource ButtonStyle1}" x:Name="btnAddItem" Content="Add Item to Invoice" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="161" Height="23" Grid.Row="1" Grid.Column="1" Click="btnAddItem_Click"/>
         <Button x:Name="btnDeleteItem" Content="Delete Item from Invoice" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Height="23" Width="161" Grid.Row="1" Grid.Column="1" Click="btnDeleteItem_Click" Style="{DynamicResource ButtonStyle1}"/>
-        <DataGrid x:Name="InvoicesList" Margin="2,2,10,32" Grid.Column="2" Grid.Row="1" MinColumnWidth="3" SelectionChanged="InvoicesList_SelectionChanged">
+        <DataGrid x:Name="InvoicesList" Margin="2,2,10,32" Grid.Column="2" Grid.Row="1" MinColumnWidth="3" SelectionChanged="InvoicesList_SelectionChanged" AlternatingRowBackground="#FFF7F7F7" IsReadOnly="True" Background="#FFBFBFBF">
             <DataGrid.Columns>
             </DataGrid.Columns>
         </DataGrid>

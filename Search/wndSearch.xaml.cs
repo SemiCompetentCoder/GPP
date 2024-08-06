@@ -159,5 +159,10 @@ namespace DummyWPF.Search
             }
            
         }
+
+        private void PART_EditableTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
