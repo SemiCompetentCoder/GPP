@@ -52,7 +52,7 @@ namespace DummyWPF.Search
         {
             try
             {
-                return $"SELECT * FROM Invoices WHERE InvoiceDate = {sInvoiceDate}";
+                return $"SELECT * FROM Invoices WHERE InvoiceDate = #{sInvoiceDate}#";
             }
             catch (Exception e)
             {
@@ -126,7 +126,7 @@ namespace DummyWPF.Search
         {
             try
             {
-                return $"select * from Invoices where InvoiceNum = {sInvoiceTotalCost}";
+                return $"select * from Invoices where TotalCost = {sInvoiceTotalCost}";
             }
             catch (Exception e)
             {
@@ -140,11 +140,11 @@ namespace DummyWPF.Search
         /// <param name="sInvoiceTotalCost"></param>
         /// <param name="sInvoiceDate"></param>
         /// <returns></returns>
-        public static string selectInvoiceByCost_Date(string sInvoiceTotalCost, string sInvoiceDate)
+        public static string selectInvoiceByDate_Cost(string sInvoiceDate, string sInvoiceTotalCost)
         {
             try
             {
-                return $"select * from Invoices where InvoiceNum = {sInvoiceTotalCost} AND InvoiceDate = #{sInvoiceDate}# ";
+                return $"select * from Invoices where TotalCost = {sInvoiceTotalCost} AND InvoiceDate = #{sInvoiceDate}# ";
             }
             catch (Exception e)
             {
@@ -154,15 +154,15 @@ namespace DummyWPF.Search
         }
 
         /// <summary>
-        /// Return distinct invoices by ID
+        /// Return distinct invoice nums
         /// </summary>
         /// <param name="sInvoiceNum"></param>
         /// <returns></returns>
-        public static string selectDistinctInvoiceNum(string sInvoiceNum)
+        public static string selectDistinctInvoiceNum()
         {
             try
             {
-                return $"select distinct({sInvoiceNum}) from Invoices order by InvoiceNum";
+                return $"SELECT DISTINCT(InvoiceNum) From Invoices order by InvoiceNum";
             }
             catch (Exception e)
             {
@@ -171,15 +171,15 @@ namespace DummyWPF.Search
         }
 
         /// <summary>
-        /// Return distinct invoices by date
+        /// Return distinct invoice dates
         /// </summary>
         /// <param name="sInvoiceDate"></param>
         /// <returns></returns>
-        public static string selectDistinctInvoiceDate(string sInvoiceDate)
+        public static string selectDistinctInvoiceDate()
         {
             try
             {
-                return $"select distinct({sInvoiceDate}) from Invoices order by InvoiceDate";
+                return $"SELECT DISTINCT(InvoiceDate) From Invoices order by InvoiceDate";
             }
             catch (Exception e)
             {
@@ -189,15 +189,15 @@ namespace DummyWPF.Search
         }
 
         /// <summary>
-        /// Return distinct invoices by TotalCost
+        /// Return distinct invoice costs
         /// </summary>
         /// <param name="sInvoiceTotalCost"></param>
         /// <returns></returns>
-        public static string selectDistinctInvoiceTCost(string sInvoiceTotalCost)
+        public static string selectDistinctInvoiceTCost()
         {
             try
             {
-                return $"select distinct({sInvoiceTotalCost}) from Invoices order by TotalCost";
+                return $"SELECT DISTINCT(TotalCost) From Invoices order by TotalCost";
             }
             catch (Exception e)
             {

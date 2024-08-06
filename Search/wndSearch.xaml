@@ -12,19 +12,19 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Column="0" Padding="5 5 5 0"  d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgSearchInvoice" Grid.Column="0" Padding="5 5 5 0"  d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns = "False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="InvoiceNo" Width="2*"/>
-                <DataGridTextColumn Header="Date" Width="2*"/>
-                <DataGridTextColumn Header="Total Charge" Width="3*"/>
+                <DataGridTextColumn Header="InvoiceNo" Width="2*" Binding="{Binding InvoiceNum}"/>
+                <DataGridTextColumn Header="Date" Width="3*" Binding="{Binding InvoiceDate}"/>
+                <DataGridTextColumn Header="Total Charge" Width="2*" Binding="{Binding TotalCost}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Canvas Grid.Column="1">
-            <ComboBox Canvas.Left="10" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <ComboBox Canvas.Left="140" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <ComboBox Canvas.Left="270" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button Content="Select" Canvas.Left="26" Canvas.Top="92" Height="44" Width="88" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Content="Clear" Canvas.Left="154" Canvas.Top="91" Height="46" Width="92" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <ComboBox x:Name="cbSearchInvoiceNumber" Canvas.Left="10" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="comboBoxes_SelectionChanged"/>
+            <ComboBox x:Name="cbSearchInvoiceDate" Canvas.Left="140" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="comboBoxes_SelectionChanged"/>
+            <ComboBox x:Name="cbSearchTotalCharge" Canvas.Left="270" Canvas.Top="36" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="comboBoxes_SelectionChanged"/>
+            <Button x:Name="btnSearchSelect" Content="Select" Canvas.Left="26" Canvas.Top="92" Height="44" Width="88" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnSearchSelect_Click"/>
+            <Button x:Name="btnSearchClear" Content="Clear" Canvas.Left="154" Canvas.Top="91" Height="46" Width="92" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnSearchClear_Click"/>
             <Label Content="Invoice Number" Canvas.Left="23" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Label Content="Invoice Date" Canvas.Left="162" Canvas.Top="10"/>
             <Label Content="Total Charge" Canvas.Left="292" Canvas.Top="10"/>
