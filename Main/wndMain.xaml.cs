@@ -66,6 +66,7 @@ namespace DummyWPF
             dateSelector.SelectedDate = DateTime.Now;
             btnAddItem.IsEnabled = false;
             btnDeleteItem.IsEnabled = false;
+            btnSave.IsEnabled = false;
             refreshFields();
             getInvoiceLineItems(InvoiceNum);
             calculateTotal();
@@ -182,6 +183,7 @@ namespace DummyWPF
                 }
                 else {
                     txtInvoiceNumber.Content = InvoiceNum.ToString(); 
+                    btnSave.IsEnabled = true;
                 }
                 //InvoicesList.ItemsSource = mainLogic.getItemsInInvoice(5000);
 
@@ -270,11 +272,13 @@ namespace DummyWPF
                 //Update the invoice with the new total cost
                 MainLogic.saveInvoice(ItemList, InvoiceNum);
                 MainLogic.updateInvoice(totalCost,  InvoiceNum);
-                
+
 
                 refreshFields();
                 txtItemCost.Text = "";
                 btnAddItem.IsEnabled = false;
+                btnSave.IsEnabled = false;
+                btnDeleteItem.IsEnabled = false;
 
                 lblInvoiceTotal.Content = "Total: $" + totalCost + ".00";
                 
@@ -306,6 +310,7 @@ namespace DummyWPF
             txtInvoiceNumber.Content = "New Invoice";
             InvoicesList.ItemsSource = null;
             ItemList.Clear();
+            btnSave.IsEnabled = false;
         }
 
         
@@ -341,6 +346,7 @@ namespace DummyWPF
                 InvoicesList.ItemsSource = ItemList;
 
                 calculateTotal();
+                btnSave.IsEnabled = true;
                 
             }
             catch(Exception ex)
@@ -404,6 +410,18 @@ namespace DummyWPF
 
             lblInvoiceTotal.Content = "Total: $" + totalCost + ".00";
 
+        }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            InvoiceNum = 0;
+            ItemList.Clear();
+            InvoicesList.ItemsSource = null;
+            refreshFields();
+            txtItemCost.Text = "";
+            btnAddItem.IsEnabled = false;
+            btnDeleteItem.IsEnabled = false;
+            btnSave.IsEnabled = false;
         }
     }
 }
