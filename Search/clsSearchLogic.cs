@@ -57,15 +57,36 @@ namespace DummyWPF.Search
         /// <exception cref="Exception"></exception>
         public List<modInvoice> RetrieveInvoices()
         {
+            List<modInvoice> InvoiceList = new List<modInvoice>();
             try
             {
-                string sSQL = clsSearchSQL.SelectAllInvoice();
-                return ParseInvoice(sSQL);
+                //string sSQL = clsSearchSQL.SelectAllInvoice();
+                //return ParseInvoice(sSQL);
+
+                db = new clsDataAccess();
+
+                DataSet ds = new DataSet();
+                int iRet = 0;
+
+                ds = db.ExecuteSQLStatement(clsSearchSQL.SelectAllInvoice(), ref iRet);
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    modInvoice invoice = new modInvoice();
+                    invoice.InvoiceNum = int.Parse(dr[0].ToString());
+                    invoice.InvoiceDate = DateTime.Parse(dr[1].ToString());
+                    invoice.TotalCost = decimal.Parse(dr[2].ToString());
+                    InvoiceList.Add(invoice);
+                }
+
+
             }
             catch (Exception ex)
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
+
+            return InvoiceList;
 
 
         }
@@ -142,20 +163,20 @@ namespace DummyWPF.Search
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public List<int> RetrieveInvoiceCosts()
+        public List<decimal> RetrieveInvoiceCosts()
         {
             try
             {
                 DataSet ds = new DataSet();
                 string sSQL = clsSearchSQL.selectDistinctInvoiceTCost();
-                List<int> iInvoiceCostTemp = new List<int>();
+                List<decimal> iInvoiceCostTemp = new List<decimal>();
                 int iRet = 0;
 
                 ds = db.ExecuteSQLStatement(sSQL, ref iRet);
 
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    if (dr[0] is int a)
+                    if (dr[0] is decimal a)
                     {
                         iInvoiceCostTemp.Add(a);
                     }
@@ -198,7 +219,7 @@ namespace DummyWPF.Search
                     {
                         invoiceEntry.InvoiceDate = b;
                     }
-                    if (dr[2] is int c)
+                    if (dr[2] is decimal c)
                     {
                         invoiceEntry.TotalCost = c;
                     }

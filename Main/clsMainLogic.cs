@@ -54,7 +54,7 @@ namespace DummyWPF.Main
                     modInvoice invoice = new modInvoice();
                     invoice.InvoiceNum = int.Parse(dr[0].ToString());
                     invoice.InvoiceDate = DateTime.Parse(dr[1].ToString());
-                    invoice.TotalCost = int.Parse(dr[2].ToString());
+                    invoice.TotalCost = decimal.Parse(dr[2].ToString());
                     InvoiceList.Add(invoice);
                 }
             }
@@ -88,7 +88,7 @@ namespace DummyWPF.Main
                 {
                     invoice.InvoiceNum = int.Parse(dr[0].ToString());
                     invoice.InvoiceDate = DateTime.Parse(dr[1].ToString());
-                    invoice.TotalCost = int.Parse(dr[2].ToString());
+                    invoice.TotalCost = decimal.Parse(dr[2].ToString());
                 }
             }
             catch (Exception ex)
@@ -120,7 +120,7 @@ namespace DummyWPF.Main
                     modItemDesc item = new modItemDesc();
                     item.ItemCode = dr[0].ToString();
                     item.ItemDesc = dr[1].ToString();
-                    item.ItemCost = int.Parse(dr[2].ToString());
+                    item.ItemCost = decimal.Parse(dr[2].ToString());
                     ItemList.Add(item);
                 }
             }
@@ -155,7 +155,7 @@ namespace DummyWPF.Main
                     modItemDesc item = new modItemDesc();
                     item.ItemCode = dr[0].ToString();
                     item.ItemDesc = dr[1].ToString();
-                    item.ItemCost = int.Parse(dr[2].ToString());
+                    item.ItemCost = decimal.Parse(dr[2].ToString());
                     modItemDescs.Add(item);
                 }
             }
@@ -205,7 +205,7 @@ namespace DummyWPF.Main
         /// <param name="totalCost"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public int createInvoice(DateTime invoiceDate, int totalCost)
+        public int createInvoice(DateTime invoiceDate, decimal totalCost)
         {
             modInvoice invoice = new modInvoice();
             try
@@ -258,7 +258,7 @@ namespace DummyWPF.Main
         /// <param name="newTotalCost"></param>
         /// <param name="newInvoiceNumber"></param>
         /// <exception cref="Exception"></exception>
-        public void updateInvoice(int newTotalCost, int newInvoiceNumber)
+        public void updateInvoice(decimal newTotalCost, int newInvoiceNumber)
         {
             try
             {

@@ -252,13 +252,13 @@ namespace DummyWPF
             {
                 //Loop through the items and remove all items and replace them with the new items
                 List<modItemDesc> items = MainLogic.getItemsInInvoice(InvoiceNum);
-
+                
                 //Calculate the total cost of the items
-                int totalCost = 0;
+                decimal totalCost = 0;
                 foreach (modItemDesc item in ItemList)
                 {
                     //Convert to decimal nearest interger
-                    int newcost = Convert.ToInt32(item.ItemCost);
+                    decimal newcost = item.ItemCost;
                     totalCost += newcost;
                 }
 
@@ -280,9 +280,9 @@ namespace DummyWPF
                 btnSave.IsEnabled = false;
                 btnDeleteItem.IsEnabled = false;
 
-                lblInvoiceTotal.Content = "Total: $" + totalCost + ".00";
+                calculateTotal();
                 
-
+                
                 
             }
             catch (Exception ex)
@@ -400,15 +400,15 @@ namespace DummyWPF
         /// </summary>
         private void calculateTotal()
         {
-            int totalCost = 0;
+            decimal totalCost = 0;
             foreach (modItemDesc item in ItemList)
             {
                 //Convert to decimal nearest interger
-                int newcost = Convert.ToInt32(item.ItemCost);
+                decimal newcost = item.ItemCost;
                 totalCost += newcost;
             }
 
-            lblInvoiceTotal.Content = "Total: $" + totalCost + ".00";
+            lblInvoiceTotal.Content = "Total: $" + totalCost;
 
         }
 

@@ -6,16 +6,25 @@ using System.Threading.Tasks;
 
 namespace GroupProject3280.Models
 {
+    /// <summary>
+    /// Invoice Model Class
+    /// </summary>
     public class modInvoice
     {
-        //InvoiceNum
+        /// <summary>
+        /// InvoiceNum
+        /// </summary>
         public int InvoiceNum { get; set; }
 
-        //InvoiceDate
+        /// <summary>
+        /// InvoiceDate
+        /// </summary>
         public DateTime InvoiceDate { get; set; }
 
-        //TotalCost
-        public int TotalCost { get; set; }
+        /// <summary>
+        /// TotalCost
+        /// </summary>
+        public decimal TotalCost { get; set; }
 
 
     }
