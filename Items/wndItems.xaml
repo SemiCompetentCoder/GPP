@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DummyWPF.Items"
         mc:Ignorable="d"
-        Title="wndItems" Height="450" Width="800">
+        Title="wndItems" Height="450" Width="800"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Grid>
         <DataGrid x:Name="dgItems" Grid.Column="0" Padding="5 5 405 0"  d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns = "False" IsReadOnly="True">
             <DataGrid.Columns>
