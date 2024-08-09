@@ -57,19 +57,28 @@ namespace DummyWPF
         /// </summary>
         public wndMain()
         {
-            InitializeComponent();
-            errorHandler = new clsErrorHandling();
+            try
+            {
 
-            //Here for testing
-            InvoiceNum = 0;
+                InitializeComponent();
+                errorHandler = new clsErrorHandling();
 
-            dateSelector.SelectedDate = DateTime.Now;
-            btnAddItem.IsEnabled = false;
-            btnDeleteItem.IsEnabled = false;
-            btnSave.IsEnabled = false;
-            refreshFields();
-            getInvoiceLineItems(InvoiceNum);
-            calculateTotal();
+                //Here for testing
+                InvoiceNum = 0;
+
+                dateSelector.SelectedDate = DateTime.Now;
+                btnAddItem.IsEnabled = false;
+                btnDeleteItem.IsEnabled = false;
+                btnSave.IsEnabled = false;
+                refreshFields();
+                getInvoiceLineItems(InvoiceNum);
+                calculateTotal();
+            }
+            catch (Exception ex) {
+                //Throw error message
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+
+            }
 
 
         }
@@ -81,8 +90,16 @@ namespace DummyWPF
         /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            wndSearch wndSearch = new wndSearch(this);
-            wndSearch.ShowDialog();
+            try
+            {
+                wndSearch wndSearch = new wndSearch(this);
+                wndSearch.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                //Throw error message
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -92,19 +109,15 @@ namespace DummyWPF
         /// <param name="e"></param>
         private void mnSearchforItems_Click(object sender, RoutedEventArgs e)
         {
-            wndItems wndItems = new wndItems(this);
-            wndItems.ShowDialog();
-        }
-
-        /// <summary>
-        /// Pass the invoice number to the main window
-        /// </summary>
-        /// <param name="invoiceNum"></param>
-        public void passInvoiceNum(int invoiceNum)
-        {
-            InvoiceNum = invoiceNum;
-
-            //Implement the logic to update the fields based on the invoice number
+            try
+            {
+                wndItems wndItems = new wndItems(this);
+                wndItems.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
 
@@ -113,17 +126,28 @@ namespace DummyWPF
         /// </summary>
         public void passFromSearch(modInvoice invoice)
         {
+            try
+            {
+                //Implement the logic to update the fields based on the invoice number
+                InvoiceNum = invoice.InvoiceNum;
+                lblNowEditing.Content = "Now Editing Invoice: " + InvoiceNum;
 
-            //Implement the logic to update the fields based on the invoice number
-            InvoiceNum = invoice.InvoiceNum;
-
-            //Update Everything
-            dateSelector.SelectedDate = DateTime.Now;
-            btnAddItem.IsEnabled = false;
-            btnDeleteItem.IsEnabled = false;
-            refreshFields();
-            getInvoiceLineItems(InvoiceNum);
-            calculateTotal();
+                //Update Everything
+                dateSelector.SelectedDate = invoice.InvoiceDate;
+                btnAddItem.IsEnabled = false;
+                btnDeleteItem.IsEnabled = false;
+                cboItemDesc.IsEnabled = true;
+                refreshFields();
+                getInvoiceLineItems(InvoiceNum);
+                calculateTotal();
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
         /// <summary>
@@ -131,14 +155,24 @@ namespace DummyWPF
         /// </summary>
         public void passFromItems()
         {
-            //Implement the logic to update the fields based on the invoice number
-            //Just need to tell the main window to update its fields
-            dateSelector.SelectedDate = DateTime.Now;
-            btnAddItem.IsEnabled = false;
-            btnDeleteItem.IsEnabled = false;
-            refreshFields();
-            getInvoiceLineItems(InvoiceNum);
-            calculateTotal();
+            try
+            {
+                //Implement the logic to update the fields based on the invoice number
+                //Just need to tell the main window to update its fields
+                dateSelector.SelectedDate = DateTime.Now;
+                btnAddItem.IsEnabled = false;
+                btnDeleteItem.IsEnabled = false;
+                refreshFields();
+                getInvoiceLineItems(InvoiceNum);
+                calculateTotal();
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
         /// <summary>
@@ -156,10 +190,7 @@ namespace DummyWPF
             }
             catch (Exception ex)
             {
-                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
-                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
-                errorHandler.sMessage = ex.Message;
-                errorHandler.displayErrorMessage();
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
 
@@ -200,10 +231,7 @@ namespace DummyWPF
             }
             catch (Exception ex)
             {
-                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
-                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
-                errorHandler.sMessage = ex.Message;
-                errorHandler.displayErrorMessage();
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
 
 
@@ -282,6 +310,12 @@ namespace DummyWPF
 
                 calculateTotal();
 
+                lblNowEditing.Content = "";
+                cboItemDesc.IsEnabled = false;
+                btnEditInvoice.Visibility = Visibility.Visible;
+                InvoicesList.IsEnabled = false;
+                dateSelector.IsEnabled = false;
+
 
 
             }
@@ -305,12 +339,23 @@ namespace DummyWPF
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            MainLogic.deleteInvoice(InvoiceNum);
-            InvoiceNum = 0;
-            txtInvoiceNumber.Content = "New Invoice";
-            InvoicesList.ItemsSource = null;
-            ItemList.Clear();
-            btnSave.IsEnabled = false;
+            try
+            {
+                MainLogic.deleteInvoice(InvoiceNum);
+                InvoiceNum = 0;
+                txtInvoiceNumber.Content = "New Invoice";
+                InvoicesList.ItemsSource = null;
+                ItemList.Clear();
+                btnSave.IsEnabled = false;
+                lblInvoiceTotal.Content = "Total: $0.00";
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
 
@@ -414,18 +459,21 @@ namespace DummyWPF
             }
             catch (Exception ex)
             {
-                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
-                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
-                errorHandler.sMessage = ex.Message;
-                errorHandler.displayErrorMessage();
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
 
         }
 
+        /// <summary>
+        /// New Invoice Button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                //Reset all the inputs
                 InvoiceNum = 0;
                 ItemList.Clear();
                 InvoicesList.ItemsSource = null;
@@ -434,6 +482,8 @@ namespace DummyWPF
                 btnAddItem.IsEnabled = false;
                 btnDeleteItem.IsEnabled = false;
                 btnSave.IsEnabled = false;
+                lblInvoiceTotal.Content = "Total: $0.00";
+                lblNowEditing.Content = "";
             }
             catch (Exception ex)
             {
@@ -444,11 +494,15 @@ namespace DummyWPF
             }
         }
 
+        /// <summary>
+        /// Reset method that is called when items are updated in the Edit Items window
+        /// </summary>
         public void reset() {
             try
             {
                 refreshFields();
                 InvoicesList.ItemsSource = null;
+                btnNew_Click(null, null);   
                 foreach (modItemDesc item in ItemList)
                 {
                     string code = item.ItemCode;
@@ -457,6 +511,7 @@ namespace DummyWPF
                     item.ItemCost = info.ItemCost;
                 }
                 InvoicesList.ItemsSource = ItemList;
+                
             }
             catch (Exception ex)
             {
@@ -465,6 +520,20 @@ namespace DummyWPF
                 errorHandler.sMessage = ex.Message;
                 errorHandler.displayErrorMessage();
             }
+        }
+
+        /// <summary>
+        /// Edit Invoice Button Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            InvoicesList.IsEnabled = true;
+            cboItemDesc.IsEnabled = true;
+            btnEditInvoice.Visibility = Visibility.Hidden;
+            btnSave.IsEnabled = true;
+            dateSelector.IsEnabled = true;
         }
     }
 }

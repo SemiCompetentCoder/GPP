@@ -164,7 +164,7 @@ namespace DummyWPF.Items
                 }
                 else
                 {
-                    MessageBox.Show("Cannot delete item, has associated invoice", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Cannot delete item, has associated invoice(s):\n" + invoiceNum, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)

@@ -702,5 +702,7 @@
         <Button x:Name="btnDelete" Content="Delete Current Invoice" HorizontalAlignment="Left" Margin="304,1,0,1" Width="146" Grid.Column="2" Grid.Row="2" Click="btnDelete_Click" Style="{DynamicResource ButtonStyle1}"/>
         <Label x:Name="lblInvoiceTotal" Grid.Column="2" Content="Total: $0.00" HorizontalAlignment="Left" Margin="304,306,0,0" Grid.Row="1" VerticalAlignment="Top" Width="145" HorizontalContentAlignment="Right" FontWeight="Bold"/>
         <Button x:Name="btnNew" Content="New Invoice" HorizontalAlignment="Left" Margin="173,1,0,1" Width="126" Grid.Column="2" Grid.Row="2" Click="btnNew_Click" Style="{DynamicResource ButtonStyle1}"/>
+        <Label x:Name="lblNowEditing" Grid.Column="2" Content="" HorizontalAlignment="Left" Margin="2,306,0,0" Grid.Row="1" VerticalAlignment="Top" Width="375" Foreground="Red" FontWeight="Bold"/>
+        <Button x:Name="btnEditInvoice" Content="Edit Invoice" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="23" Width="161" Grid.Row="2" Grid.Column="1" Click="btnEditInvoice_Click" Style="{DynamicResource ButtonStyle1}" Visibility="Hidden"/>
     </Grid>
 </Window>
