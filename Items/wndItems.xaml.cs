@@ -1,6 +1,9 @@
+using GroupProject3280;
+using GroupProject3280.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,35 +23,108 @@ namespace DummyWPF.Items
     public partial class wndItems : Window
     {
         private wndMain mainWindow;
+        private clsItemsLogic logic;
+        private clsErrorHandling errorHandler;
         //private clsItemsLogic clsLogic;
         public wndItems(wndMain mainWindow)
         {
-            //clsItemsLogic = new clsItemsLogic();
-            InitializeComponent();
-            this.mainWindow = mainWindow; //Main window is passed in as a parameter
+            errorHandler = new clsErrorHandling();
+            try
+            {
+                //clsItemsLogic = new clsItemsLogic();
+                InitializeComponent();
+                this.mainWindow = mainWindow; //Main window is passed in as a parameter
+                logic = new clsItemsLogic();
+                dgItems.ItemsSource = logic.getItemDescs();
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
-        public void getModifiedLineItems() 
-        { 
-            // method to be called by the window that created this window
-            // will simply serve as a wrapper for a method which will be implemented in the business logic class
-        }
-
+        /// <summary>
+        /// Handles item desc submit action
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bSubmit_Click(object sender, RoutedEventArgs e)
         {
-            ;
+            try
+            {
+                if (tbCode.Text != "")
+                {
+                    logic.submitLineItem(tbCode.Text, tbDescription.Text, tbCost.Text);
+                    dgItems.ItemsSource = logic.getItemDescs();
+                    this.mainWindow.reset();
+                }
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
+        /// <summary>
+        /// Handles item desc delete action
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bDelete_Click(object sender, RoutedEventArgs e)
         {
-            ;
+            try
+            {
+                if (tbCode.Text != "")
+                {
+                    logic.deleteLineItem(tbCode.Text);
+                    dgItems.ItemsSource = logic.getItemDescs();
+                }
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
 
-        //When this.Close is called tell the main window to refresh.
-        //Method Definition HERE
-        //{
-        //    mainWindow.refreshFields();
-        //    this.Close();
-        //}
+        /// <summary>
+        /// Handles item desc read action
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bRead_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (tbCode.Text != "")
+                {
+                    tbCost.Text = "";
+                    tbDescription.Text = "";
+                    string code = tbCode.Text;
+                    modItemDesc info = clsItemsLogic.getInfoForSpecificLineItem(code);
+                    tbCost.Text = info.getCost();
+                    if (tbCost.Text == "-1")
+                    {
+                        tbCost.Text = "";
+                    }
+                    tbDescription.Text = info.ItemDesc;
+                }
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
+        }
     }
 }

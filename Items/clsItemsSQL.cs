@@ -27,6 +27,29 @@ namespace DummyWPF.Items
             }
         }
 
+        /// <summary>
+        /// Gets the info for a specific line item
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string GetItemInfo(string code)
+        {
+            try
+            {
+                string sSQL = "SELECT * FROM ItemDesc WHERE ItemCode = '" + code + "'";
+                return sSQL;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get all item descriptions
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string GetAllItemDesc()
         {
             try
@@ -40,6 +63,12 @@ namespace DummyWPF.Items
             }
         }
 
+        /// <summary>
+        /// Get invoice number for line item
+        /// </summary>
+        /// <param name="itemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string GetInvoiceNumFromLineItem(string itemCode) 
         {
             try
@@ -53,6 +82,14 @@ namespace DummyWPF.Items
             }
         }
 
+        /// <summary>
+        /// Update item description
+        /// </summary>
+        /// <param name="itemDesc"></param>
+        /// <param name="itemCost"></param>
+        /// <param name="itemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string UpdateItemDesc(string itemDesc, string itemCost, string itemCode)
         {
             try
@@ -66,11 +103,19 @@ namespace DummyWPF.Items
             }
         }
 
+        /// <summary>
+        /// Insert into item description
+        /// </summary>
+        /// <param name="itemDesc"></param>
+        /// <param name="itemCost"></param>
+        /// <param name="itemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string InsertIntoItemDesc(string itemDesc, string itemCost, string itemCode) 
         {
             try
             {
-                string sSQL = "Insert into ItemDesc (ItemCode, ItemDesc, Cost) Values ('"+itemDesc+"', '"+itemCost+"', "+itemCode+")";
+                string sSQL = "Insert into ItemDesc (ItemCode, ItemDesc, Cost) Values ('"+itemCode+"', '"+itemDesc+"', "+itemCost+")";
                 return sSQL;
             }
             catch (Exception e)
@@ -79,6 +124,12 @@ namespace DummyWPF.Items
             }
         }
 
+        /// <summary>
+        /// Delete item description
+        /// </summary>
+        /// <param name="itemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string DeleteFromItemDesc(string itemCode) 
         {
             try

@@ -7,20 +7,20 @@
         mc:Ignorable="d"
         Title="wndItems" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="dataGridItems" d:ItemsSource="{d:SampleData ItemCount=20}" Margin="0,0,400,0" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgItems" Grid.Column="0" Padding="5 5 405 0"  d:ItemsSource="{d:SampleData ItemCount=20}" AutoGenerateColumns = "False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Code" Width="50"/>
-                <DataGridTextColumn Header="Cost" Width="100"/>
-                <DataGridTextColumn Header="Description" Width="242"/>
+                <DataGridTextColumn Header="Code" Width="50" Binding="{Binding ItemCode}"/>
+                <DataGridTextColumn Header="Cost" Width="100" Binding="{Binding ItemCost}"/>
+                <DataGridTextColumn Header="Description" Width="250" Binding="{Binding ItemDesc}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="bSubmit" Content="Submit" HorizontalAlignment="Left" Margin="420,393,0,0" VerticalAlignment="Top" Width="87" Click="bSubmit_Click"/>
-        <TextBox x:Name="tbCode" HorizontalAlignment="Left" Margin="420,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbCode" HorizontalAlignment="Left" Margin="420,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <Label x:Name="labelCode" Content="Code" HorizontalAlignment="Left" Margin="420,19,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
         <TextBox x:Name="tbCost" HorizontalAlignment="Left" Margin="420,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.479,-0.931"/>
         <Label x:Name="labelCost" Content="Cost" HorizontalAlignment="Left" Margin="420,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
         <Label x:Name="labelDescription" Content="Description" HorizontalAlignment="Left" Margin="420,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.059,0.256"/>
-        <Button x:Name="bRead" Content="Read" HorizontalAlignment="Left" Margin="525,393,0,0" VerticalAlignment="Top" Width="87"/>
+        <Button x:Name="bRead" Content="Read" HorizontalAlignment="Left" Margin="525,393,0,0" VerticalAlignment="Top" Width="87" Click="bRead_Click"/>
         <Button x:Name="bDelete" Content="Delete" HorizontalAlignment="Left" Margin="634,393,0,0" VerticalAlignment="Top" Width="87" Click="bDelete_Click"/>
         <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Margin="420,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="301" Height="139"/>
 

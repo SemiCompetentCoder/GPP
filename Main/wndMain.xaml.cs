@@ -1,4 +1,4 @@
-﻿using DummyWPF.Items;
+using DummyWPF.Items;
 using DummyWPF.Main;
 using DummyWPF.Search;
 using GroupProject3280;
@@ -51,7 +51,7 @@ namespace DummyWPF
         /// Current Invoice object
         /// </summary>
         modInvoice currentInvoice;
-        
+
         /// <summary>
         /// Main Window Constructor
         /// </summary>
@@ -62,7 +62,7 @@ namespace DummyWPF
 
             //Here for testing
             InvoiceNum = 0;
-            
+
             dateSelector.SelectedDate = DateTime.Now;
             btnAddItem.IsEnabled = false;
             btnDeleteItem.IsEnabled = false;
@@ -70,8 +70,8 @@ namespace DummyWPF
             refreshFields();
             getInvoiceLineItems(InvoiceNum);
             calculateTotal();
-            
-            
+
+
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace DummyWPF
         public void passInvoiceNum(int invoiceNum)
         {
             InvoiceNum = invoiceNum;
-            
+
             //Implement the logic to update the fields based on the invoice number
         }
 
@@ -174,7 +174,7 @@ namespace DummyWPF
                 clsMainLogic mainLogic = new clsMainLogic();
                 currentInvoice = mainLogic.getInvoiceById(InvoiceNum);
 
-                
+
 
                 InvoicesList.ItemsSource = ItemList;
                 if (InvoiceNum == 0)
@@ -182,7 +182,7 @@ namespace DummyWPF
                     txtInvoiceNumber.Content = "New Invoice";
                 }
                 else {
-                    txtInvoiceNumber.Content = InvoiceNum.ToString(); 
+                    txtInvoiceNumber.Content = InvoiceNum.ToString();
                     btnSave.IsEnabled = true;
                 }
                 //InvoicesList.ItemsSource = mainLogic.getItemsInInvoice(5000);
@@ -206,7 +206,7 @@ namespace DummyWPF
                 errorHandler.displayErrorMessage();
             }
 
-            
+
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace DummyWPF
                     txtItemCost.Text = ItemList[index].ItemCost.ToString("C");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
                 errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
@@ -239,7 +239,7 @@ namespace DummyWPF
             }
         }
 
-        
+
 
         /// <summary>
         /// Save/Update Changes to Database
@@ -252,7 +252,7 @@ namespace DummyWPF
             {
                 //Loop through the items and remove all items and replace them with the new items
                 List<modItemDesc> items = MainLogic.getItemsInInvoice(InvoiceNum);
-                
+
                 //Calculate the total cost of the items
                 decimal totalCost = 0;
                 foreach (modItemDesc item in ItemList)
@@ -268,10 +268,10 @@ namespace DummyWPF
                 {
                     InvoiceNum = MainLogic.createInvoice((DateTime)dateSelector.SelectedDate, totalCost);
                 }
-                
+
                 //Update the invoice with the new total cost
                 MainLogic.saveInvoice(ItemList, InvoiceNum);
-                MainLogic.updateInvoice(totalCost,  InvoiceNum);
+                MainLogic.updateInvoice(totalCost, InvoiceNum);
 
 
                 refreshFields();
@@ -281,9 +281,9 @@ namespace DummyWPF
                 btnDeleteItem.IsEnabled = false;
 
                 calculateTotal();
-                
-                
-                
+
+
+
             }
             catch (Exception ex)
             {
@@ -293,7 +293,7 @@ namespace DummyWPF
                 errorHandler.displayErrorMessage();
             }
 
-            
+
 
 
         }
@@ -313,7 +313,7 @@ namespace DummyWPF
             btnSave.IsEnabled = false;
         }
 
-        
+
         /// <summary>
         /// When an item is selected from the list enable the delete button
         /// </summary>
@@ -338,7 +338,7 @@ namespace DummyWPF
                 modItemDesc item = (modItemDesc)cboItemDesc.SelectedItem;
 
                 //Add Item to list
-               
+
                 ItemList.Add(item);
 
                 //Clear the list
@@ -347,9 +347,9 @@ namespace DummyWPF
 
                 calculateTotal();
                 btnSave.IsEnabled = true;
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
                 errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
@@ -384,9 +384,9 @@ namespace DummyWPF
                 btnAddItem.IsEnabled = false;
 
                 calculateTotal();
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
                 errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
@@ -400,28 +400,71 @@ namespace DummyWPF
         /// </summary>
         private void calculateTotal()
         {
-            decimal totalCost = 0;
-            foreach (modItemDesc item in ItemList)
+            try
             {
-                //Convert to decimal nearest interger
-                decimal newcost = item.ItemCost;
-                totalCost += newcost;
-            }
+                decimal totalCost = 0;
+                foreach (modItemDesc item in ItemList)
+                {
+                    //Convert to decimal nearest interger
+                    decimal newcost = item.ItemCost;
+                    totalCost += newcost;
+                }
 
-            lblInvoiceTotal.Content = "Total: $" + totalCost;
+                lblInvoiceTotal.Content = "Total: $" + totalCost;
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
 
         }
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            InvoiceNum = 0;
-            ItemList.Clear();
-            InvoicesList.ItemsSource = null;
-            refreshFields();
-            txtItemCost.Text = "";
-            btnAddItem.IsEnabled = false;
-            btnDeleteItem.IsEnabled = false;
-            btnSave.IsEnabled = false;
+            try
+            {
+                InvoiceNum = 0;
+                ItemList.Clear();
+                InvoicesList.ItemsSource = null;
+                refreshFields();
+                txtItemCost.Text = "";
+                btnAddItem.IsEnabled = false;
+                btnDeleteItem.IsEnabled = false;
+                btnSave.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
+        }
+
+        public void reset() {
+            try
+            {
+                refreshFields();
+                InvoicesList.ItemsSource = null;
+                foreach (modItemDesc item in ItemList)
+                {
+                    string code = item.ItemCode;
+                    modItemDesc info = clsItemsLogic.getInfoForSpecificLineItem(code);
+                    item.ItemDesc = info.ItemDesc;
+                    item.ItemCost = info.ItemCost;
+                }
+                InvoicesList.ItemsSource = ItemList;
+            }
+            catch (Exception ex)
+            {
+                errorHandler.sClass = MethodInfo.GetCurrentMethod().DeclaringType.Name;
+                errorHandler.sMethod = MethodInfo.GetCurrentMethod().Name;
+                errorHandler.sMessage = ex.Message;
+                errorHandler.displayErrorMessage();
+            }
         }
     }
 }
