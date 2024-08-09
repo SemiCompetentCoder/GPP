@@ -1,11 +1,11 @@
-﻿<Window x:Class="DummyWPF.wndMain"
+﻿<Window x:Name="Main_Window" x:Class="DummyWPF.wndMain"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DummyWPF"
         mc:Ignorable="d"
-        Title="wndMain" Height="474" Width="826"
+        Title="Main Window" Height="474" Width="826"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
         <Style x:Key="FocusVisual">
