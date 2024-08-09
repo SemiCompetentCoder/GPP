@@ -1,8 +1,10 @@
-﻿using GroupProject3280;
+using DummyWPF.Items;
+using GroupProject3280;
 using GroupProject3280.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -272,11 +274,5 @@ namespace DummyWPF.Main
             }
 
         }
-
-
-        
-
-        
-        
     }
 }
