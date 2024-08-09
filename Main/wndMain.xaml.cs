@@ -73,6 +73,8 @@ namespace DummyWPF
                 refreshFields();
                 getInvoiceLineItems(InvoiceNum);
                 calculateTotal();
+
+                
             }
             catch (Exception ex) {
                 //Throw error message
@@ -140,6 +142,9 @@ namespace DummyWPF
                 refreshFields();
                 getInvoiceLineItems(InvoiceNum);
                 calculateTotal();
+
+                //Hide the menu
+                mnMenuGroup.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
@@ -316,6 +321,9 @@ namespace DummyWPF
                 InvoicesList.IsEnabled = false;
                 dateSelector.IsEnabled = false;
 
+                //Enable the menu
+                mnMenuGroup.Visibility = Visibility.Visible;
+
 
 
             }
@@ -348,6 +356,12 @@ namespace DummyWPF
                 ItemList.Clear();
                 btnSave.IsEnabled = false;
                 lblInvoiceTotal.Content = "Total: $0.00";
+
+                //Enable the menu
+                mnMenuGroup.Visibility = Visibility.Visible;
+
+                btnEditInvoice.Visibility = Visibility.Hidden;
+                lblNowEditing.Content = "";
             }
             catch (Exception ex)
             {
@@ -428,6 +442,9 @@ namespace DummyWPF
                 txtItemCost.Text = string.Empty;
                 btnAddItem.IsEnabled = false;
 
+                //Enable the menu
+                mnMenuGroup.Visibility = Visibility.Visible;
+
                 calculateTotal();
 
             }
@@ -484,6 +501,13 @@ namespace DummyWPF
                 btnSave.IsEnabled = false;
                 lblInvoiceTotal.Content = "Total: $0.00";
                 lblNowEditing.Content = "";
+                cboItemDesc.IsEnabled = true;
+                dateSelector.IsEnabled = true;
+
+                btnEditInvoice.Visibility = Visibility.Hidden;
+
+                //Enable the menu
+                mnMenuGroup.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
@@ -534,6 +558,7 @@ namespace DummyWPF
             btnEditInvoice.Visibility = Visibility.Hidden;
             btnSave.IsEnabled = true;
             dateSelector.IsEnabled = true;
+            mnMenuGroup.Visibility = Visibility.Hidden;
         }
     }
 }
