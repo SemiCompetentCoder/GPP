@@ -6,23 +6,42 @@ using System.Threading.Tasks;
 
 namespace GroupProject3280.Models
 {
+    /// <summary>
+    /// Item Description Model Class
+    /// </summary>
     public class modItemDesc
     {
-        //Item Code
+        /// <summary>
+        /// Item Code
+        /// </summary>
         public string ItemCode { get; set; }
 
-        //Item Description
+        /// <summary>
+        /// Item Description
+        /// </summary>
         public string ItemDesc { get; set; }
 
-        //Item Cost
+        /// <summary>
+        /// Item Cost
+        /// </summary>
         public decimal ItemCost { get; set; }
 
-        //Override the toString()
+        /// <summary>
+        /// Override the toString()
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return ItemDesc.ToString();
+            //Format String to show cost
+            string newCost = String.Format("{0:C}", ItemCost);
+            
+            return ItemDesc.ToString() + " " + newCost;
         }
 
+        /// <summary>
+        /// Get the Item Code
+        /// </summary>
+        /// <returns></returns>
         public string getCost()
         {
             return ItemCost.ToString();

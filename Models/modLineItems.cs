@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace GroupProject3280.Models
 {
+    /// <summary>
+    /// Line Items Model Class
+    /// </summary>
     public class modLineItems
     {
-        // Invoice Number
+        /// <summary>
+        /// Invoice Number
+        /// </summary>
         public int InvoiceNum { get; set; }
 
-        //LineItemNumber
+        /// <summary>
+        /// LineItemNumber
+        /// </summary>
         public int LineItemNum { get; set; }
 
-        //Item Code
+        /// <summary>
+        /// Item Code
+        /// </summary>
         public string ItemCode { get; set; }
     }
 }
